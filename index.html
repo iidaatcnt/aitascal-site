@@ -1,27 +1,652 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI TasCal（AI助かる）| 現場のためのAI導入・伴走サポート</title>
+  <meta name="description" content="採用不要・月額制で、社内のAI活用・業務効率化を即解決！中小企業のためのAI導入・伴走サポートサービス「AI TasCal（AI助かる）」。プロンプト構築から業務自動化、社内研修まで丸ごとサポート。">
+  
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', '"Noto Sans JP"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#4f46e5',
+              600: '#4338ca',
+              700: '#3730a3',
+              900: '#312e81',
+            },
+            accent: {
+              50: '#ecfdf5',
+              500: '#10b981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-feature-settings: "palt";
+    }
+  </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans">
-  <header class="bg-white border-b border-slate-200 py-4 px-6 flex justify-between items-center max-w-6xl mx-mx-auto">
-    <div class="text-2xl font-bold text-indigo-600">AI TasCal</div>
-    <span class="text-sm bg-indigo-50 text-indigo-700 px-3 py-1 rounded-full font-medium">AI駆け込み寺</span>
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-100 selection:text-brand-900">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/80 backdrop-blur-md transition-all duration-300">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-3">
+        <!-- Logo Icon SVG -->
+        <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-600 text-white shadow-md shadow-brand-500/20">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21L14.907 18m4.917-3.184l-4.917 3.184m0 0L10 14m3.824-3.824a3 3 0 11-4.243-4.243m4.242 4.242L9.88 9.88" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707m0-12.728l.707.707m11.314 11.314l.707.707" />
+          </svg>
+        </div>
+        <div>
+          <span class="text-xl font-extrabold tracking-tight text-slate-900 sm:text-2xl">AI TasCal</span>
+          <span class="ml-2 rounded-full bg-brand-50 px-2.5 py-0.5 text-xs font-bold text-brand-600">AI助かる</span>
+        </div>
+      </div>
+      
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="#problems" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors font-medium">お悩み解決</a>
+        <a href="#services" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors font-medium">サービス内容</a>
+        <a href="#pricing" class="text-sm font-semibold text-slate-600 hover:text-brand-600 transition-colors font-medium">料金プラン</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <a href="#contact" class="hidden sm:inline-flex items-center justify-center rounded-xl bg-brand-600 px-5 py-2.5 text-sm font-bold text-white shadow-md shadow-brand-500/10 transition duration-200 hover:bg-brand-700 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+          無料相談はこちら
+        </a>
+        <!-- Mobile Menu Toggle Button (Scroll to contact) -->
+        <a href="#contact" class="inline-flex sm:hidden items-center justify-center rounded-lg bg-brand-50 p-2.5 text-brand-600 hover:bg-brand-100 transition duration-200">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="h-6 w-6">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+          </svg>
+        </a>
+      </div>
+    </div>
   </header>
 
-  <main class="max-w-4xl mx-auto px-6 py-16 text-center">
-    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 leading-tight mb-6">
-      採用不要・月額制で、<br class="hidden sm:inline">社内のAI活用・業務効率化を即解決！
-    </h1>
-    <p class="text-lg text-slate-600 mb-8 max-w-2xl mx-auto">
-      「AIを導入したいけれど使いこなせない」「現場で教えてくれる人がいない」とお悩みの中小企業へ。プロンプト構築から業務自動化、社内研修まで丸ごと伴走サポート。
-    </p>
-    <div class="inline-block bg-indigo-600 text-white font-bold px-8 py-4 rounded-xl shadow-lg hover:bg-indigo-700 transition">
-      準備中（近日サービス開始）
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-brand-50/50 via-white to-slate-50 py-16 sm:py-24 lg:py-32">
+    <!-- Background Accents -->
+    <div class="absolute inset-y-0 right-1/2 -z-10 mr-16 w-[200%] origin-bottom-left skew-x-[-30deg] bg-white shadow-xl shadow-brand-500/5 ring-1 ring-slate-500/10 md:mr-28 lg:mr-0"></div>
+    
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+        <!-- Content Column -->
+        <div class="lg:col-span-7 text-center lg:text-left">
+          <!-- Badge -->
+          <div class="inline-flex items-center gap-1.5 rounded-full bg-brand-100 px-3 py-1 text-xs sm:text-sm font-semibold text-brand-700 mb-6">
+            <span class="flex h-2 w-2 rounded-full bg-brand-500 animate-pulse"></span>
+            中小企業のための現場目線AI伴走サポート
+          </div>
+          
+          <!-- Main Title -->
+          <h1 class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:leading-[1.15] mb-6">
+            採用不要・月額制で、<br class="hidden sm:inline">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-indigo-500">社内のAI活用・業務効率化</span>を即解決！
+          </h1>
+          
+          <!-- Subtext -->
+          <p class="mx-auto lg:mx-0 max-w-2xl text-base sm:text-lg text-slate-600 leading-relaxed mb-8">
+            「AIを導入したいけれど使いこなせない」「現場で教えてくれる人がいない」とお悩みの中小企業へ。プロンプト構築から業務自動化、社内研修まで丸ごと伴走サポート。
+          </p>
+          
+          <!-- CTA Action Row -->
+          <div class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4">
+            <a href="#contact" class="inline-flex items-center justify-center rounded-xl bg-brand-600 px-8 py-4 text-base font-bold text-white shadow-lg shadow-brand-500/25 transition-all hover:bg-brand-700 hover:-translate-y-0.5">
+              まずは無料で相談してみる
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="ml-2 h-5 w-5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <a href="#services" class="inline-flex items-center justify-center rounded-xl bg-white border border-slate-300 px-8 py-4 text-base font-bold text-slate-700 shadow-sm transition-all hover:bg-slate-50 hover:border-slate-400">
+              サービス詳細を見る
+            </a>
+          </div>
+
+          <!-- Trust Badges -->
+          <div class="mt-10 grid grid-cols-3 gap-4 border-t border-slate-200/80 pt-8 max-w-lg mx-auto lg:mx-0">
+            <div class="text-center lg:text-left">
+              <p class="text-xs font-bold text-slate-500">採用コスト</p>
+              <p class="text-lg sm:text-xl font-extrabold text-brand-600">0円</p>
+            </div>
+            <div class="text-center lg:text-left border-l border-slate-200 pl-4">
+              <p class="text-xs font-bold text-slate-500">最短導入</p>
+              <p class="text-lg sm:text-xl font-extrabold text-brand-600">即日開始可能</p>
+            </div>
+            <div class="text-center lg:text-left border-l border-slate-200 pl-4">
+              <p class="text-xs font-bold text-slate-500">サポート体制</p>
+              <p class="text-lg sm:text-xl font-extrabold text-brand-600">現場主義伴走</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Graphic Column -->
+        <div class="lg:col-span-5 flex justify-center">
+          <div class="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl shadow-slate-200 ring-1 ring-slate-100">
+            <!-- Simulated AI Chat Interface -->
+            <div class="flex items-center justify-between border-b border-slate-100 pb-4 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="h-3 w-3 rounded-full bg-red-400"></span>
+                <span class="h-3 w-3 rounded-full bg-yellow-400"></span>
+                <span class="h-3 w-3 rounded-full bg-green-400"></span>
+              </div>
+              <span class="text-xs font-bold text-slate-400">AI TasCal Assistant</span>
+              <div class="h-4 w-4"></div>
+            </div>
+            <div class="space-y-4">
+              <!-- Message 1 (User) -->
+              <div class="flex items-start gap-2.5 justify-end">
+                <div class="bg-brand-50 text-brand-900 rounded-2xl rounded-tr-none px-4 py-2.5 text-xs sm:text-sm max-w-[85%] font-medium font-medium">
+                  社内でAIを活用して、データ集計の時間を削減したいのですが...
+                </div>
+              </div>
+              <!-- Message 2 (AI Helper) -->
+              <div class="flex items-start gap-2.5">
+                <div class="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-brand-600 text-white font-bold text-xs">
+                  AI
+                </div>
+                <div class="bg-slate-100 text-slate-800 rounded-2xl rounded-tl-none px-4 py-2.5 text-xs sm:text-sm max-w-[85%] font-medium space-y-2">
+                  <p>お任せください！以下のステップで自動化できます。</p>
+                  <ol class="list-decimal list-inside space-y-1 text-slate-600">
+                    <li>集計手順の整理</li>
+                    <li>専用プロンプトの作成</li>
+                    <li>現場へのハンズオン研修</li>
+                  </ol>
+                </div>
+              </div>
+              <!-- Message 3 (User) -->
+              <div class="flex items-start gap-2.5 justify-end">
+                <div class="bg-brand-50 text-brand-900 rounded-2xl rounded-tr-none px-4 py-2.5 text-xs sm:text-sm max-w-[85%] font-medium">
+                  それなら私でも使えそうです！ぜひお願いします。
+                </div>
+              </div>
+            </div>
+            <div class="mt-6 border-t border-slate-100 pt-4 flex gap-2">
+              <div class="w-full rounded-lg bg-slate-50 border border-slate-200 px-3 py-2 text-xs text-slate-400 flex items-center">
+                プロンプトを入力してください...
+              </div>
+              <div class="rounded-lg bg-brand-600 text-white px-3 py-2 flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                  <path d="M3.105 2.289a.75.75 0 00-.826.95l1.414 4.925A1.5 1.5 0 005.135 9.25h6.115a.75.75 0 010 1.5H5.135a1.5 1.5 0 00-1.442 1.086l-1.414 4.926a.75.75 0 00.826.95 28.896 28.896 0 0015.293-7.154.75.75 0 000-1.115A28.897 28.897 0 003.105 2.289z" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </main>
+  </section>
+
+  <!-- Pain Points Section -->
+  <section id="problems" class="py-20 sm:py-28 bg-white border-y border-slate-200/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand-600 mb-3 font-medium">Problems</h2>
+        <p class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+          こんなAI・ITのお悩みはありませんか？
+        </p>
+        <p class="mt-4 text-base text-slate-600">
+          多くの企業がAIの重要性を感じつつも、導入や現場定着でつまずいています。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <div class="flex flex-col rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-300">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-red-50 text-red-600">
+            <!-- Icon User Group Remove -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-950 mb-3">
+            優秀なAI・IT人材を採用できない
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            専門のAI人材を正社員で採用するのは困難で、人件費も高騰しています。「頼れる相談相手が社内にいない」というのが多くの現場の現状です。
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="flex flex-col rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-300">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-amber-50 text-amber-600">
+            <!-- Icon Chat bubble Left right -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9s.25 0 .25.25v9a.25.25 0 01-.25.25h-9a.25.25 0 01-.25-.25v-9c0-.25.114-.25.25-.25z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 15h.008v.008H16.5V15zm0-2.25h.008v.008H16.5v-.008zm0-2.25h.008v.008H16.5V10.5z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-950 mb-3">
+            ツールを導入したが現場で使われない
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            ChatGPTやClaudeなどのアカウントを用意したものの、「どう業務に活かせばいいかわからない」と現場で放置されていませんか？
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="flex flex-col rounded-2xl border border-slate-200/80 bg-white p-8 shadow-sm transition-all duration-300 hover:shadow-md hover:border-slate-300">
+          <div class="mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
+            <!-- Icon Document Text -->
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z" />
+            </svg>
+          </div>
+          <h3 class="text-lg font-bold text-slate-950 mb-3">
+            自動化やプロンプト構築ができない
+          </h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            「日常業務を自動化したいけれど、プロンプトの記述方法がわからない」「毎回手探りで作業していて非効率」という課題を抱えています。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Menu Section -->
+  <section id="services" class="py-20 sm:py-28 bg-slate-50">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand-600 mb-3 font-medium">Services</h2>
+        <p class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+          現場を動かす3つのAI伴走サポート
+        </p>
+        <p class="mt-4 text-base text-slate-600">
+          AIのセッティングから現場でのツール作成、日々の教育までワンストップで支援します。
+        </p>
+      </div>
+
+      <div class="space-y-16">
+        <!-- Service 1 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="inline-flex items-center rounded-md bg-brand-50 px-2.5 py-1 text-xs font-bold text-brand-700">01. 導入・初期設定</span>
+            <h3 class="text-2xl font-bold text-slate-950">AI導入・キッティング</h3>
+            <p class="text-slate-600 leading-relaxed">
+              安心して業務でAIツールを使用できるように、企業アカウントの適切な整備から、利用ガイドラインの策定、社内ルール作りまで一括でサポートします。個人情報やセキュリティに配慮した環境を作ります。
+            </p>
+            <ul class="space-y-3 font-medium text-slate-800 text-sm">
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-accent-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                アカウントの安心・安全な一括整備
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-accent-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                社内セキュリティ・利用ガイドライン策定
+              </li>
+            </ul>
+          </div>
+          <div class="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <span class="text-sm font-bold text-slate-800">キッティング支援内容</span>
+                <span class="text-xs text-brand-600 font-semibold">完了目標: 3日〜</span>
+              </div>
+              <div class="space-y-2">
+                <div class="p-3 bg-slate-50 rounded-xl text-xs sm:text-sm font-medium text-slate-700 flex justify-between">
+                  <span>セキュアなアカウント設計・権限管理</span>
+                  <span class="text-accent-600">対応可</span>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl text-xs sm:text-sm font-medium text-slate-700 flex justify-between">
+                  <span>社内向けAIポリシー・利用マニュアル策定</span>
+                  <span class="text-accent-600">対応可</span>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl text-xs sm:text-sm font-medium text-slate-700 flex justify-between">
+                  <span>API接続・ツールの接続初期設定</span>
+                  <span class="text-accent-600">対応可</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 2 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center pt-8">
+          <div class="lg:col-span-6 lg:order-last space-y-6">
+            <span class="inline-flex items-center rounded-md bg-brand-50 px-2.5 py-1 text-xs font-bold text-brand-700">02. 現場の効率化</span>
+            <h3 class="text-2xl font-bold text-slate-950">AIヘルプデスク・業務自動化</h3>
+            <p class="text-slate-600 leading-relaxed">
+              「この作業をAIで自動化したい」という要望に対し、専任の担当者が最適なプロンプトの設計やツールの構築を実施します。日々の困りごとに応える相談窓口（ヘルプデスク）としても機能します。
+            </p>
+            <ul class="space-y-3 font-medium text-slate-800 text-sm">
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-accent-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                実用的なプロンプト・カスタムGPTs of OpenAIの構築
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-accent-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                チャットやSlackでのクイックなヘルプデスク
+              </li>
+            </ul>
+          </div>
+          <div class="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <span class="text-sm font-bold text-slate-800">自動化プロンプト（例）</span>
+                <span class="text-xs text-brand-600 font-semibold">カスタマイズ自由</span>
+              </div>
+              <div class="space-y-3">
+                <div class="p-3 bg-slate-50 rounded-xl text-xs">
+                  <p class="font-bold text-brand-700 mb-1">【営業報告書・議事録作成】</p>
+                  <p class="text-slate-600">ミーティングの文字起こしテキストから、決定事項とNext Actionを自動抽出します。</p>
+                </div>
+                <div class="p-3 bg-slate-50 rounded-xl text-xs">
+                  <p class="font-bold text-brand-700 mb-1">【問い合わせメール自動下書き】</p>
+                  <p class="text-slate-600">顧客からの要望に合わせた、丁寧な返信メール案を数秒で作成します。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Service 3 -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center pt-8">
+          <div class="lg:col-span-6 space-y-6">
+            <span class="inline-flex items-center rounded-md bg-brand-50 px-2.5 py-1 text-xs font-bold text-brand-700">03. 社員の育成</span>
+            <h3 class="text-2xl font-bold text-slate-950">現場向け伴走レクチャー・研修</h3>
+            <p class="text-slate-600 leading-relaxed">
+              座学だけではなく、実際に手を動かす「ハンズオン講習」を行います。社員一人ひとりがAIを道具として自発的に使いこなし、業務改善のアイデアを出せるレベルまで育て上げます。
+            </p>
+            <ul class="space-y-3 font-medium text-slate-800 text-sm">
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-accent-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                実際の業務データを用いたハンズオン講習
+              </li>
+              <li class="flex items-center gap-2.5">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5 text-accent-600">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+                </svg>
+                習熟度に応じたレベル別教育プログラム
+              </li>
+            </ul>
+          </div>
+          <div class="lg:col-span-6 bg-white p-8 rounded-2xl border border-slate-200/80 shadow-sm">
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                <span class="text-sm font-bold text-slate-800">伴走ロードマップ</span>
+                <span class="text-xs text-brand-600 font-semibold">着実なスキルアップ</span>
+              </div>
+              <div class="space-y-3 text-xs sm:text-sm">
+                <div class="flex gap-3">
+                  <div class="flex flex-col items-center">
+                    <div class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[10px] font-bold text-white">1</div>
+                    <div class="h-8 w-0.5 bg-slate-200"></div>
+                  </div>
+                  <div>
+                    <p class="font-bold text-slate-900">基礎講習 (第1〜2週)</p>
+                    <p class="text-slate-500 text-xs">AIの性質の理解と、基礎的なプロンプトの習得</p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <div class="flex flex-col items-center">
+                    <div class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[10px] font-bold text-white">2</div>
+                    <div class="h-8 w-0.5 bg-slate-200"></div>
+                  </div>
+                  <div>
+                    <p class="font-bold text-slate-900">実践・業務適用 (第3〜6週)</p>
+                    <p class="text-slate-500 text-xs">実際の自社業務にあてはめたプロンプト構築実践</p>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <div class="flex flex-col items-center">
+                    <div class="flex h-6 w-6 items-center justify-center rounded-full bg-brand-600 text-[10px] font-bold text-white">3</div>
+                  </div>
+                  <div>
+                    <p class="font-bold text-slate-900">自走体制の確立 (第7週〜)</p>
+                    <p class="text-slate-500 text-xs">ガイドラインに沿った業務への適用と自発的な改善</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 sm:py-28 bg-white border-t border-slate-200/60">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand-600 mb-3 font-medium font-medium">Plans</h2>
+        <p class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+          企業のフェーズに合わせた料金プラン
+        </p>
+        <p class="mt-4 text-base text-slate-600">
+          まずは手軽に始めたい企業から、社内定着を徹底的に進めたい企業まで柔軟に対応します。
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+        <!-- Plan 1 -->
+        <div class="flex flex-col rounded-2xl border border-slate-200 bg-white p-8 shadow-sm transition-all hover:border-slate-300">
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-slate-900">スポット対応プラン</h3>
+            <p class="mt-2 text-sm text-slate-500">必要な時に必要な分だけ依頼したい企業へ</p>
+            <p class="mt-4 flex items-baseline text-slate-900">
+              <span class="text-3xl font-black tracking-tight">¥50,000〜</span>
+              <span class="ml-1 text-sm font-semibold text-slate-500">/回</span>
+            </p>
+          </div>
+          <ul class="space-y-4 border-t border-slate-100 pt-6 text-sm text-slate-600 flex-1">
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-brand-600 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              特定業務のAIプロンプト作成（1件）
+            </li>
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-brand-600 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              セキュリティポリシー作成支援
+            </li>
+            <li class="flex items-center gap-3 text-slate-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-slate-300 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              月々のヘルプデスク・相談窓口
+            </li>
+            <li class="flex items-center gap-3 text-slate-400">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-4 h-4 text-slate-300 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              社内向けハンズオン講習
+            </li>
+          </ul>
+          <a href="#contact" class="mt-8 block rounded-xl border border-slate-300 bg-white py-3 px-4 text-center text-sm font-bold text-slate-700 hover:bg-slate-50 transition duration-200">
+            このプランを相談する
+          </a>
+        </div>
+
+        <!-- Plan 2 -->
+        <div class="relative flex flex-col rounded-2xl border-2 border-brand-600 bg-white p-8 shadow-md">
+          <div class="absolute -top-4 right-6 rounded-full bg-brand-600 px-3 py-1 text-xs font-bold text-white">おすすめ</div>
+          <div class="mb-6">
+            <h3 class="text-lg font-bold text-slate-900">月額伴走サポートプラン</h3>
+            <p class="mt-2 text-sm text-slate-500">継続的な効率化と社内定着を目指す企業へ</p>
+            <p class="mt-4 flex items-baseline text-slate-900">
+              <span class="text-3xl font-black tracking-tight">¥150,000〜</span>
+              <span class="ml-1 text-sm font-semibold text-slate-500">/月</span>
+            </p>
+          </div>
+          <ul class="space-y-4 border-t border-slate-100 pt-6 text-sm text-slate-600 flex-1">
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-brand-600 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              毎月のプロンプト改善・ツール構築（制限なし）
+            </li>
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-brand-600 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              Slack/Teams等による日常のヘルプデスク対応
+            </li>
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-brand-600 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              月1回のハンズオン研修・進捗ミーティング
+            </li>
+            <li class="flex items-center gap-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4 text-brand-600 shrink-0">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              最新AIトレンドの共有と業務適用の提案
+            </li>
+          </ul>
+          <a href="#contact" class="mt-8 block rounded-xl bg-brand-600 py-3 px-4 text-center text-sm font-bold text-white hover:bg-brand-700 shadow-md shadow-brand-500/10 transition duration-200">
+            このプランを相談する
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Form Section -->
+  <section id="contact" class="py-20 sm:py-28 bg-slate-50 border-t border-slate-200/60">
+    <div class="mx-auto max-w-3xl px-4 sm:px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-xs font-bold uppercase tracking-wider text-brand-600 mb-3 font-medium">Contact</h2>
+        <p class="text-3xl font-black tracking-tight text-slate-900 sm:text-4xl">
+          無料相談・お問い合わせ
+        </p>
+        <p class="mt-4 text-base text-slate-600">
+          AIの活用方法、導入にかかるコスト、研修内容など、どのようなことでもお気軽にご相談ください。
+        </p>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="rounded-2xl border border-slate-200 bg-white p-6 sm:p-10 shadow-sm">
+        <form id="inquiryForm" class="space-y-6">
+          <div>
+            <label for="company" class="block text-sm font-bold text-slate-700">会社名</label>
+            <input type="text" id="company" name="company" placeholder="例：株式会社タスカル" required class="mt-1.5 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 sm:text-sm">
+          </div>
+
+          <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div>
+              <label for="name" class="block text-sm font-bold text-slate-700">お名前</label>
+              <input type="text" id="name" name="name" placeholder="例：山田 太郎" required class="mt-1.5 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 sm:text-sm">
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-bold text-slate-700">メールアドレス</label>
+              <input type="email" id="email" name="email" placeholder="例：yamada@example.com" required class="mt-1.5 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 sm:text-sm">
+            </div>
+          </div>
+
+          <div>
+            <label for="plan" class="block text-sm font-bold text-slate-700">ご希望のプラン（検討中も可）</label>
+            <select id="plan" name="plan" class="mt-1.5 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 sm:text-sm">
+              <option value="none">選択してください</option>
+              <option value="spot">スポット対応プラン</option>
+              <option value="monthly">月額伴走サポートプラン</option>
+              <option value="undecided">まずは相談して決めたい</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="message" class="block text-sm font-bold text-slate-700">ご相談内容</label>
+            <textarea id="message" name="message" rows="4" placeholder="例：ChatGPTを導入したが使いこなせていないため、現場向けの研修プランについて詳しく聞きたい。" required class="mt-1.5 block w-full rounded-xl border border-slate-300 px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm focus:border-brand-500 focus:outline-none focus:ring-1 focus:ring-brand-500 sm:text-sm"></textarea>
+          </div>
+
+          <div>
+            <button type="submit" class="w-full flex justify-center items-center rounded-xl bg-brand-600 px-6 py-4 text-base font-bold text-white shadow-md shadow-brand-500/10 hover:bg-brand-700 transition duration-200 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2">
+              メッセージを送信する
+            </button>
+          </div>
+        </form>
+
+        <!-- Form Success State (hidden initially) -->
+        <div id="successMessage" class="hidden text-center py-8 space-y-4">
+          <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-accent-50 text-accent-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900">お問い合わせありがとうございます</h3>
+          <p class="text-sm text-slate-600 max-w-md mx-auto">
+            内容を確認の上、担当者より通常1営業日以内にご連絡いたします。今しばらくお待ちください。
+          </p>
+          <button id="resetFormBtn" class="mt-4 text-sm font-bold text-brand-600 hover:text-brand-700">再度入力する</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
+      <div class="flex items-center justify-center gap-2.5">
+        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-600 text-white shadow-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="h-5 w-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904L9 21L14.907 18m4.917-3.184l-4.917 3.184m0 0L10 14m3.824-3.824a3 3 0 11-4.243-4.243m4.242 4.242L9.88 9.88" />
+          </svg>
+        </div>
+        <span class="text-lg font-bold text-white">AI TasCal</span>
+      </div>
+      <p class="text-xs text-slate-500">
+        &copy; 2026 AI TasCal. All rights reserved.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Script to handle Form Interactions -->
+  <script>
+    const form = document.getElementById('inquiryForm');
+    const successMsg = document.getElementById('successMessage');
+    const resetBtn = document.getElementById('resetFormBtn');
+
+    if (form && successMsg) {
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Simulating submission
+        form.classList.add('hidden');
+        successMsg.classList.remove('hidden');
+      });
+    }
+
+    if (resetBtn && form && successMsg) {
+      resetBtn.addEventListener('click', function() {
+        form.reset();
+        successMsg.classList.add('hidden');
+        form.classList.remove('hidden');
+      });
+    }
+  </script>
 </body>
 </html>
