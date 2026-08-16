@@ -1,7 +1,13 @@
 {
   "name": "aitascal-site",
+  "main": "src/index.js",
   "compatibility_date": "2024-09-23",
   "assets": {
-    "directory": "."
-  }
+    "directory": "public"
+  },
+  "send_email": [
+    {
+      "name": "EMAIL"
+    }
+  ]
 }
