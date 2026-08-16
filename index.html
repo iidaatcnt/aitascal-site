@@ -503,27 +503,88 @@
     </div>
   </footer>
 
-  <!-- Script for form submission simulation -->
+  <!-- Script for form submission via FormSubmit to miidacnt@gmail.com -->
   <script>
-    // Hero download form simulation
+    const ENDPOINT = "https://formsubmit.co/ajax/miidacnt@gmail.com";
+
+    // Hero download form
     const heroForm = document.getElementById('heroDownloadForm');
     const heroSuccess = document.getElementById('heroSuccessMsg');
     if (heroForm && heroSuccess) {
-      heroForm.addEventListener('submit', function(e) {
+      heroForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        heroForm.classList.add('hidden');
-        heroSuccess.classList.remove('hidden');
+        const submitBtn = heroForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.innerText;
+        submitBtn.disabled = true;
+        submitBtn.innerText = '送信中...';
+
+        const payload = {
+          _subject: '【AI TasCal】資料ダウンロード請求がありました',
+          種別: '資料ダウンロード請求',
+          会社名: document.getElementById('hero_company').value,
+          お名前: document.getElementById('hero_lastname').value + ' ' + document.getElementById('hero_firstname').value,
+          メールアドレス: document.getElementById('hero_email').value,
+          電話番号: document.getElementById('hero_phone').value,
+          認知経路: document.getElementById('hero_source').value,
+          お問い合わせ内容: document.getElementById('hero_message').value || '（なし）'
+        };
+
+        try {
+          await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.error('Submission error:', err);
+        } finally {
+          heroForm.classList.add('hidden');
+          heroSuccess.classList.remove('hidden');
+        }
       });
     }
 
-    // Global contact form simulation
+    // Global contact form
     const globalForm = document.getElementById('globalContactForm');
     const globalSuccess = document.getElementById('globalSuccessMsg');
     if (globalForm && globalSuccess) {
-      globalForm.addEventListener('submit', function(e) {
+      globalForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        globalForm.classList.add('hidden');
-        globalSuccess.classList.remove('hidden');
+        const submitBtn = globalForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.innerText = '送信中...';
+
+        const planSelect = document.getElementById('c_plan');
+        const planText = planSelect.options[planSelect.selectedIndex].text;
+
+        const payload = {
+          _subject: '【AI TasCal】Webサイトよりお問い合わせがありました',
+          種別: '無料相談・お問い合わせ',
+          会社名: document.getElementById('c_company').value,
+          お名前: document.getElementById('c_name').value,
+          メールアドレス: document.getElementById('c_email').value,
+          検討中のプラン: planText,
+          ご相談内容: document.getElementById('c_message').value
+        };
+
+        try {
+          await fetch(ENDPOINT, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+        } catch (err) {
+          console.error('Submission error:', err);
+        } finally {
+          globalForm.classList.add('hidden');
+          globalSuccess.classList.remove('hidden');
+        }
       });
     }
   </script>
