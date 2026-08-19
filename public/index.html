@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI TasCal（AI助かる）| 現場のためのAI導入・伴走サポート</title>
-  <meta name="description" content="採用不要・月額制で、社内のAI活用・業務効率化を即解決！中小企業のためのAI導入・伴走サポートサービス「AI TasCal（AI助かる）」。">
+  <title>AI TasCal（AI助かる）| 企業向けAI導入・伴走アウトソーシングサービス</title>
+  <meta name="description" content="採用不要、最短即日で社内のAI活用・業務効率化を即解決！中小企業のための現場向けAI導入・伴走サポートサービス「AI TasCal（AI助かる）」。プロンプト構築から業務自動化、社内研修まで丸ごと対応。">
   
   <!-- Favicon -->
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="alternate icon" href="/favicon.svg">
   <link rel="apple-touch-icon" href="/favicon.svg">
   
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS (CDN) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -22,12 +22,15 @@
           },
           colors: {
             brand: {
-              teal: '#007a82',      /* IT TasCal Teal */
+              teal: '#007a82',        /* IT TasCal Teal */
               tealHover: '#006268',
-              green: '#79c01a',     /* IT TasCal Green */
+              tealLight: '#e6f3f4',
+              green: '#79c01a',       /* IT TasCal Vibrant Green */
               greenHover: '#65a114',
+              greenLight: '#f4fbe9',
               tagGreen: '#54b200',
-              bgLight: '#f1f6f8'    /* Hero section background */
+              bgLight: '#f1f6f8',
+              darkBg: '#1e1e24'
             }
           }
         }
@@ -38,48 +41,69 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
     body {
       font-feature-settings: "palt";
+    }
+    .circle-pattern {
+      background-image: radial-gradient(circle at 10% 50%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 90% 20%, rgba(255, 255, 255, 0.15) 0%, transparent 40%);
     }
   </style>
 </head>
 <body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-brand-teal/10 selection:text-brand-teal">
 
   <!-- Top Announcement Banner -->
-  <div class="bg-brand-teal text-white text-center py-2 px-4 text-xs sm:text-sm font-bold flex items-center justify-center gap-2">
+  <div class="bg-brand-teal text-white text-center py-2 px-4 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 tracking-wide">
     <span>📢</span>
     <span>【オープン記念】現場のAI活用・業務効率化の無料オンライン診断を実施中！</span>
   </div>
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
-    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
-      <!-- Logo in IT TasCal style -->
-      <div class="flex items-center gap-2">
+  <header class="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
+      
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 group">
         <span class="text-2xl font-black tracking-tight">
-          <span class="text-brand-green font-extrabold italic">AI</span>
+          <span class="text-brand-green font-extrabold italic group-hover:opacity-90 transition">AI</span>
           <span class="text-brand-teal font-extrabold font-sans">TasCal</span>
         </span>
         <span class="text-[10px] font-bold bg-brand-teal/5 text-brand-teal px-2 py-0.5 rounded-full border border-brand-teal/10">AI助かる</span>
-      </div>
+      </a>
       
-      <!-- Navigation Links -->
-      <nav class="hidden lg:flex items-center gap-6 xl:gap-8">
-        <a href="#problems" class="text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors">AI TasCalで解決できること</a>
-        <a href="#services" class="text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors">サービスについて</a>
-        <a href="#pricing" class="text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors">料金プラン</a>
+      <!-- Desktop Navigation -->
+      <nav class="hidden lg:flex items-center gap-5 xl:gap-7">
+        <a href="#about" class="text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors">AI TasCalで解決できること</a>
+        
+        <!-- Dropdown: サービスについて -->
+        <div class="relative group">
+          <button class="flex items-center gap-1 text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors py-2">
+            <span>サービスについて</span>
+            <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-brand-teal transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+            </svg>
+          </button>
+          <div class="absolute left-0 top-full hidden group-hover:block w-56 rounded-xl bg-white shadow-xl border border-slate-100 py-2 z-50 animate-fade-in">
+            <a href="#engineer" class="block px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-brand-teal">在籍プロフェッショナル紹介</a>
+            <a href="#isd" class="block px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-brand-teal">対応可能なAI推進業務</a>
+            <a href="#bpo" class="block px-4 py-2.5 text-xs font-bold text-slate-700 hover:bg-slate-50 hover:text-brand-teal">他社BPO・コンサルとの比較</a>
+          </div>
+        </div>
+
+        <a href="#case" class="text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors">導入事例</a>
         <a href="#flow" class="text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors">ご利用の流れ</a>
+        <a href="#faq" class="text-xs xl:text-sm font-bold text-slate-700 hover:text-brand-teal transition-colors">よくある質問</a>
       </nav>
 
       <!-- CTA Buttons -->
       <div class="flex items-center gap-2 sm:gap-3">
-        <a href="#contact" class="inline-flex items-center justify-center rounded bg-brand-teal px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white transition hover:bg-brand-tealHover">
+        <a href="#download" class="inline-flex items-center justify-center rounded bg-brand-teal px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-bold text-white transition hover:bg-brand-tealHover shadow-sm">
           資料請求
         </a>
-        <a href="#contact" class="inline-flex items-center justify-center rounded bg-brand-green px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold text-white transition hover:bg-brand-greenHover">
+        <a href="#contact" class="inline-flex items-center justify-center rounded bg-brand-green px-4 sm:px-5 py-2.5 text-xs sm:text-sm font-bold text-white transition hover:bg-brand-greenHover shadow-sm">
           お問い合わせ
         </a>
       </div>
@@ -87,90 +111,89 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="bg-brand-bgLight/85 py-12 lg:py-20 border-b border-slate-200">
+  <section class="bg-brand-bgLight/85 py-12 lg:py-16 border-b border-slate-200" id="hero">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
         
-        <!-- Left Side: Content & Badge & Tags -->
-        <div class="lg:col-span-7 space-y-6">
+        <!-- Left Side: Value Prop, Badges, Tags, Stats -->
+        <div class="lg:col-span-7 space-y-5">
+          
           <!-- Green Pill Badge -->
-          <div class="inline-block rounded bg-brand-green px-3 py-1 text-xs font-black text-white uppercase tracking-wider">
-            AI・IT推進の常駐・伴走サポートサービス
+          <div class="inline-block rounded bg-brand-green px-3.5 py-1 text-xs font-black text-white uppercase tracking-wider shadow-sm">
+            AI・IT推進の常駐・アウトソーシングサービス
           </div>
           
-          <!-- Heading -->
+          <!-- Main Heading -->
           <h1 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-slate-900 leading-tight">
-            <span class="text-brand-teal">採用不要、月額制</span>で<br class="hidden sm:inline">
+            <span class="text-brand-teal">採用不要、最短即日</span>で<br class="hidden sm:inline">
             社内のAI活用・業務効率化を即解決！
           </h1>
           
-          <h2 class="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">
-            AI導入のプロが幅広い業務を丸ごと伴走サポート
+          <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-slate-800 tracking-tight">
+            AI導入のプロが幅広い業務を丸ごと対応
           </h2>
 
-          <!-- Service Tags (Aligned to screenshot tag bubbles) -->
-          <div class="flex flex-wrap gap-2 pt-2">
-            <span class="rounded bg-white border border-brand-green px-3 py-1.5 text-xs font-bold text-brand-tagGreen">AIヘルプデスク</span>
-            <span class="rounded bg-white border border-brand-green px-3 py-1.5 text-xs font-bold text-brand-tagGreen">プロンプト構築</span>
-            <span class="rounded bg-white border border-brand-green px-3 py-1.5 text-xs font-bold text-brand-tagGreen">アカウントキッティング</span>
-            <span class="rounded bg-white border border-brand-green px-3 py-1.5 text-xs font-bold text-brand-tagGreen">現場ハンズオン講習</span>
-            <span class="rounded bg-white border border-brand-green px-3 py-1.5 text-xs font-bold text-brand-tagGreen">業務自動化・ツール連携</span>
-            <span class="rounded bg-white border border-brand-green px-3 py-1.5 text-xs font-bold text-brand-tagGreen">利用ガイドライン策定</span>
-            <span class="rounded bg-white border border-brand-green px-3 py-1.5 text-xs font-bold text-brand-tagGreen">最新AI技術調査</span>
+          <!-- Service Tags (Aligned to IT TasCal style) -->
+          <div class="flex flex-wrap gap-2 pt-1">
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">AIヘルプデスク</span>
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">プロンプト構築</span>
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">アカウントキッティング</span>
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">現場ハンズオン講習</span>
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">業務自動化・ツール連携</span>
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">利用ガイドライン策定</span>
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">最新AI技術調査</span>
+            <span class="rounded bg-white border border-brand-green px-3 py-1 text-xs font-bold text-brand-tagGreen shadow-xs">社内AI推進PMO</span>
           </div>
 
-          <!-- Laurels Graphic / Stats (Aligned to screenshot) -->
-          <div class="flex flex-wrap gap-8 pt-4">
+          <!-- Laurels Graphic / Stats -->
+          <div class="flex flex-wrap items-center gap-8 pt-3">
             <!-- Stat 1 -->
-            <div class="flex items-center gap-3">
-              <!-- Laurel SVG Left -->
-              <svg class="h-10 w-6 text-brand-green" viewBox="0 0 24 40" fill="currentColor">
+            <div class="flex items-center gap-2">
+              <svg class="h-9 w-5 text-brand-green" viewBox="0 0 24 40" fill="currentColor">
                 <path d="M2 10a18.9 18.9 0 004 12c1.8 2.2 4 4.3 6.6 5.8l-1.6 2.6c-3-1.8-5.6-4.2-7.6-6.8a21.8 21.8 0 01-4.4-13.6h3zm0-8a19 19 0 003.5 10H2.2A22.2 22.2 0 010 2h2z" />
               </svg>
               <div class="text-center">
                 <p class="text-[10px] font-bold text-slate-500">サポート満足度</p>
                 <p class="text-lg sm:text-xl font-black text-slate-900"><span class="text-2xl sm:text-3xl text-brand-teal">98.2</span> %</p>
               </div>
-              <!-- Laurel SVG Right -->
-              <svg class="h-10 w-6 text-brand-green transform scale-x-[-1]" viewBox="0 0 24 40" fill="currentColor">
+              <svg class="h-9 w-5 text-brand-green transform scale-x-[-1]" viewBox="0 0 24 40" fill="currentColor">
                 <path d="M2 10a18.9 18.9 0 004 12c1.8 2.2 4 4.3 6.6 5.8l-1.6 2.6c-3-1.8-5.6-4.2-7.6-6.8a21.8 21.8 0 01-4.4-13.6h3zm0-8a19 19 0 003.5 10H2.2A22.2 22.2 0 010 2h2z" />
               </svg>
             </div>
 
             <!-- Stat 2 -->
-            <div class="flex items-center gap-3">
-              <!-- Laurel SVG Left -->
-              <svg class="h-10 w-6 text-brand-green" viewBox="0 0 24 40" fill="currentColor">
+            <div class="flex items-center gap-2">
+              <svg class="h-9 w-5 text-brand-green" viewBox="0 0 24 40" fill="currentColor">
                 <path d="M2 10a18.9 18.9 0 004 12c1.8 2.2 4 4.3 6.6 5.8l-1.6 2.6c-3-1.8-5.6-4.2-7.6-6.8a21.8 21.8 0 01-4.4-13.6h3zm0-8a19 19 0 003.5 10H2.2A22.2 22.2 0 010 2h2z" />
               </svg>
               <div class="text-center">
                 <p class="text-[10px] font-bold text-slate-500">導入支援実績</p>
                 <p class="text-lg sm:text-xl font-black text-slate-900"><span class="text-2xl sm:text-3xl text-brand-teal">150</span> 社以上</p>
               </div>
-              <!-- Laurel SVG Right -->
-              <svg class="h-10 w-6 text-brand-green transform scale-x-[-1]" viewBox="0 0 24 40" fill="currentColor">
+              <svg class="h-9 w-5 text-brand-green transform scale-x-[-1]" viewBox="0 0 24 40" fill="currentColor">
                 <path d="M2 10a18.9 18.9 0 004 12c1.8 2.2 4 4.3 6.6 5.8l-1.6 2.6c-3-1.8-5.6-4.2-7.6-6.8a21.8 21.8 0 01-4.4-13.6h3zm0-8a19 19 0 003.5 10H2.2A22.2 22.2 0 010 2h2z" />
               </svg>
             </div>
           </div>
 
           <!-- Bottom Action Buttons (Left) -->
-          <div class="flex flex-wrap gap-4 pt-4">
-            <a href="#contact" class="inline-flex items-center justify-center rounded bg-brand-green px-8 py-3.5 text-base font-bold text-white transition hover:bg-brand-greenHover shadow-md">
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#download" class="inline-flex items-center justify-center rounded bg-brand-green px-7 py-3 text-sm font-bold text-white transition hover:bg-brand-greenHover shadow-md">
               (→) 資料請求する
             </a>
-            <a href="#contact" class="inline-flex items-center justify-center rounded bg-brand-teal px-8 py-3.5 text-base font-bold text-white transition hover:bg-brand-tealHover shadow-md">
+            <a href="#contact" class="inline-flex items-center justify-center rounded bg-brand-teal px-7 py-3 text-sm font-bold text-white transition hover:bg-brand-tealHover shadow-md">
               (→) お問い合わせ
             </a>
           </div>
         </div>
 
-        <!-- Right Side: Brochure Download Form Card (IT TasCal style) -->
-        <div class="lg:col-span-5 bg-white rounded-xl shadow-lg border border-slate-200 p-6 sm:p-8">
-          <h3 class="text-base font-black text-brand-teal text-center leading-snug mb-6">
+        <!-- Right Side: Top Brochure Download Form Card (#download) -->
+        <div id="download" class="lg:col-span-5 bg-white rounded-xl shadow-lg border border-slate-200 p-6 sm:p-8">
+          <h3 class="text-base font-black text-brand-teal text-center leading-snug mb-5">
             AI TasCalのサービス資料を<br>今すぐ無料でダウンロード
           </h3>
-          <form id="heroDownloadForm" class="space-y-4">
+          
+          <form id="heroDownloadForm" class="space-y-3.5">
             <!-- Honeypot Bot Trap (Invisible to humans) -->
             <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true">
               <label for="hero_hp_website">Leave blank</label>
@@ -208,16 +231,16 @@
               <label for="hero_source" class="block text-xs font-bold text-slate-700">AI TasCalをどこで知りましたか？ <span class="text-red-500 font-normal">*</span></label>
               <select id="hero_source" name="source" required class="mt-1 block w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none">
                 <option value="">選択してください</option>
-                <option value="search">検索エンジン</option>
-                <option value="sns">SNS</option>
-                <option value="referral">知人の紹介</option>
+                <option value="search">検索エンジン (Google / Yahoo)</option>
+                <option value="sns">SNS (X, Facebook, LinkedIn)</option>
+                <option value="referral">知人・お取引先の紹介</option>
                 <option value="other">その他</option>
               </select>
             </div>
 
             <div>
               <label for="hero_message" class="block text-xs font-bold text-slate-700">お問い合わせ内容</label>
-              <textarea id="hero_message" name="message" rows="3" placeholder="ご質問やご相談がございましたらご記入ください" class="mt-1 block w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none"></textarea>
+              <textarea id="hero_message" name="message" rows="2" placeholder="ご質問やご相談がございましたらご記入ください" class="mt-1 block w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none"></textarea>
             </div>
 
             <button type="submit" class="w-full rounded bg-brand-green py-3 text-sm font-bold text-white transition hover:bg-brand-greenHover shadow">
@@ -225,18 +248,35 @@
             </button>
           </form>
 
-          <!-- Simulated Success Message -->
-          <div id="heroSuccessMsg" class="hidden text-center py-6">
-            <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600 mb-3">
+          <!-- Success Message -->
+          <div id="heroSuccessMsg" class="hidden text-center py-6 space-y-3">
+            <div class="mx-auto flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
               </svg>
             </div>
             <p class="text-sm font-bold text-slate-900">ご入力ありがとうございます！</p>
-            <p class="text-xs text-slate-500 mt-1">資料のダウンロード用URLをメールでお送りしました。</p>
+            <p class="text-xs text-slate-500">担当者より資料URLのご案内メールをお送りいたしました。</p>
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust / Client Logos Bar -->
+  <section class="py-8 bg-white border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+      <p class="text-xs font-bold text-slate-500 tracking-wider mb-6 uppercase">
+        導入企業数 <span class="text-brand-teal font-extrabold text-sm">150社</span> 以上 ―― さまざまな企業様にご利用いただいています
+      </p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4 items-center justify-center opacity-70 grayscale hover:grayscale-0 transition-all">
+        <div class="p-3 border border-slate-200 rounded text-xs font-bold text-slate-600">製造業 A社様</div>
+        <div class="p-3 border border-slate-200 rounded text-xs font-bold text-slate-600">不動産・建設 B社様</div>
+        <div class="p-3 border border-slate-200 rounded text-xs font-bold text-slate-600">専門商社 C社様</div>
+        <div class="p-3 border border-slate-200 rounded text-xs font-bold text-slate-600">医療法人 Dグループ様</div>
+        <div class="p-3 border border-slate-200 rounded text-xs font-bold text-slate-600">士業法人 E事務所様</div>
+        <div class="p-3 border border-slate-200 rounded text-xs font-bold text-slate-600">IT・Web F社様</div>
       </div>
     </div>
   </section>
@@ -244,120 +284,379 @@
   <!-- Problems Section -->
   <section id="problems" class="py-16 sm:py-24 bg-white border-b border-slate-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <h2 class="text-brand-teal font-extrabold text-sm uppercase tracking-wider mb-2">Problems</h2>
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Problems</h2>
         <p class="text-2xl sm:text-3xl font-black text-slate-900">
-          こんなAI・ITのお悩みはありませんか？
+          このようなお悩みありませんか？
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- Problem Card 1 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Problem 1 -->
         <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded bg-red-50 text-red-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M22 10.5h-6m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
-            </svg>
+          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded bg-red-50 text-red-600 font-bold text-xs">
+            採用課題
           </div>
-          <h3 class="text-base font-bold text-slate-900 mb-2">優秀なAI・IT人材を採用できない</h3>
+          <h3 class="text-base font-bold text-slate-900 mb-2">優秀なAI人材を採用できない…</h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            専門のAI人材を正社員で採用するのは極めて困難で、費用も高騰しています。身近に相談できる人が社内にいないため放置されがちです。
+            AIの専門人材は市場で奪い合いになっており、年収の高騰やスキルの見極めが困難。自社で専任を採用するのは極めて高いハードルです。
           </p>
         </div>
 
-        <!-- Problem Card 2 -->
+        <!-- Problem 2 -->
         <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded bg-amber-50 text-amber-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9s.25 0 .25.25v9a.25.25 0 01-.25.25h-9a.25.25 0 01-.25-.25v-9c0-.25.114-.25.25-.25z" />
-            </svg>
+          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded bg-amber-50 text-amber-600 font-bold text-xs">
+            定着課題
           </div>
-          <h3 class="text-base font-bold text-slate-900 mb-2">導入はしたが現場で使われていない</h3>
+          <h3 class="text-base font-bold text-slate-900 mb-2">ツールを導入したが現場で使われない</h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            ChatGPTなどのアカウントを用意しても「実際の業務にどう活用すればよいかわからない」と現場の社員が放置してしまっています。
+            ChatGPTやClaude等のアカウントを契約したものの、「自社の実務でどう使うかわからない」と現場で放置・形骸化してしまっています。
           </p>
         </div>
 
-        <!-- Problem Card 3 -->
+        <!-- Problem 3 -->
         <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
-          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded bg-blue-50 text-blue-600">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12" />
-            </svg>
+          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded bg-blue-50 text-blue-600 font-bold text-xs">
+            業務効率化
           </div>
-          <h3 class="text-base font-bold text-slate-900 mb-2">自動化やプロンプトの作り方が不明</h3>
+          <h3 class="text-base font-bold text-slate-900 mb-2">日常業務の自動化やプロンプトが作れない</h3>
           <p class="text-xs text-slate-600 leading-relaxed">
-            「日常のルーティンワークを自動化したいけれど、効果的なプロンプトの設計やツール連携の手順がわからない」という悩みを抱えています。
+            定型業務やデータ集計を効率化したいが、的確なプロンプト設計やノーコードツール連携のノウハウがなく、毎回手作業で行っています。
           </p>
+        </div>
+
+        <!-- Problem 4 -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm hover:shadow-md transition">
+          <div class="mb-4 inline-flex h-10 w-10 items-center justify-center rounded bg-emerald-50 text-emerald-600 font-bold text-xs">
+            リソース不足
+          </div>
+          <h3 class="text-base font-bold text-slate-900 mb-2">プロジェクト単位で推進の手が足りない</h3>
+          <p class="text-xs text-slate-600 leading-relaxed">
+            既存の情シスや業務担当者は通常業務で手一杯。AI活用プロジェクトを進めたくても、旗振り役や伴走役が社内に不足しています。
+          </p>
+        </div>
+      </div>
+
+      <!-- Resolution Banner Box -->
+      <div class="mt-10 rounded-xl bg-brand-bgLight p-6 sm:p-8 text-center border border-brand-teal/20">
+        <p class="text-base sm:text-lg font-bold text-slate-900">
+          <span class="text-brand-teal font-extrabold">AI TasCal</span> ならAI人材不足を解消し、専門性を備えたAI推進のプロが<br class="hidden sm:inline">
+          常駐・アウトソーシング（BPO）で総合的にご支援します。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefit / What AI TasCal Can Solve Section -->
+  <section id="about" class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Benefit</h2>
+        <p class="text-2xl sm:text-3xl font-black text-slate-900">
+          AI TasCalで解決できること
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Benefit 1 -->
+        <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex h-8 w-8 items-center justify-center rounded bg-brand-teal text-white font-black text-sm">01</span>
+              <h3 class="text-lg font-bold text-slate-900">採用に時間をかけず、必要な人材を迅速に配置できる</h3>
+            </div>
+            <p class="text-xs font-bold text-brand-teal mb-3">最短即日〜1ヶ月で業務開始可能 / 100名以上の即戦力AIプロが伴走・BPO支援</p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              自社での採用活動には数ヶ月〜半年かかりますが、AI TasCalなら最短即日で最適なAIプロフェッショナルをアサイン。急なリソース不足やプロジェクト立ち上げにも柔軟に対応します。
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 2 -->
+        <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex h-8 w-8 items-center justify-center rounded bg-brand-teal text-white font-black text-sm">02</span>
+              <h3 class="text-lg font-bold text-slate-900">ノンコア業務を委託し、コア業務に専念できる</h3>
+            </div>
+            <p class="text-xs font-bold text-brand-teal mb-3">プロンプト作成から業務フロー自動化までワンストップサポート</p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              定型業務のプロンプト化、ツールの初期設定、社員からの問い合わせ対応などのノンコア業務を丸ごと委託。社内メンバーは本来注力すべきコアビジネスに専念できます。
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 3 -->
+        <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex h-8 w-8 items-center justify-center rounded bg-brand-teal text-white font-black text-sm">03</span>
+              <h3 class="text-lg font-bold text-slate-900">必要な人材をプロジェクト単位で柔軟に確保できる</h3>
+            </div>
+            <p class="text-xs font-bold text-brand-teal mb-3">1名のアドバイザーから複数名の推進チームまで柔軟な体制</p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              スポットでの短期導入支援から、月額での常駐・伴走支援まで、企業の成長フェーズや業務量に応じた最適なチーム編成でサポートします。
+            </p>
+          </div>
+        </div>
+
+        <!-- Benefit 4 -->
+        <div class="bg-white rounded-xl p-8 border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <div class="flex items-center gap-3 mb-4">
+              <span class="flex h-8 w-8 items-center justify-center rounded bg-brand-teal text-white font-black text-sm">04</span>
+              <h3 class="text-lg font-bold text-slate-900">採用コスト不要で、安定したAI推進体制を実現</h3>
+            </div>
+            <p class="text-xs font-bold text-brand-teal mb-3">人件費を変動費にすることで、無駄なコストを徹底削減</p>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              正社員採用にかかる数十万〜百万円単位のエージェント手数料や固定給が不要。必要な期間だけプロを活用できるため、圧倒的な費用対効果を発揮します。
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Intermediate CTA Banner (Vibrant Green) -->
+      <div class="mt-16 rounded-2xl bg-brand-green p-8 sm:p-12 text-center text-white shadow-xl circle-pattern">
+        <h3 class="text-2xl sm:text-3xl font-black mb-4">
+          まずは無料で相談してみる！
+        </h3>
+        <p class="text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed mb-8 opacity-95">
+          まずは無料相談でお悩みをお聞かせください。専門家が最適なAI活用プラン・体制を提案し、即戦力で課題解決をサポートいたします。
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#download" class="inline-flex items-center justify-center rounded bg-slate-900 px-8 py-3.5 text-sm font-bold text-white hover:bg-black transition shadow">
+            資料ダウンロード
+          </a>
+          <a href="#contact" class="inline-flex items-center justify-center rounded bg-white px-8 py-3.5 text-sm font-bold text-brand-teal hover:bg-slate-50 transition shadow">
+            お問い合わせ
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Services Section -->
-  <section id="services" class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
+  <!-- Professional Tier Section (#engineer) -->
+  <section id="engineer" class="py-16 sm:py-24 bg-white border-b border-slate-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
-        <h2 class="text-brand-teal font-extrabold text-sm uppercase tracking-wider mb-2">Services</h2>
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Professionals</h2>
         <p class="text-2xl sm:text-3xl font-black text-slate-900">
-          現場を動かす3つのAI伴走サポート
+          在籍プロフェッショナルのご紹介
         </p>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        <!-- Service 1 -->
-        <div class="bg-white rounded-xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
-          <div>
-            <span class="inline-block text-[10px] font-bold text-brand-teal bg-brand-teal/5 px-2 py-0.5 rounded mb-3 border border-brand-teal/10">01. 導入環境整備</span>
-            <h3 class="text-lg font-bold text-slate-900 mb-3">AI導入・キッティング</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              セキュアなアカウント整備から、安心・安全な利用ガイドラインの策定、社内ルール作りまで一括で支援。個人情報の漏洩リスク等を考慮した体制を構築します。
-            </p>
+        
+        <!-- Tier 1: Senior -->
+        <div class="rounded-xl border-2 border-brand-teal bg-white p-6 sm:p-8 shadow-sm flex flex-col justify-between relative">
+          <div class="absolute -top-3 right-6 rounded bg-brand-teal px-2.5 py-0.5 text-[10px] font-bold text-white uppercase">
+            Top Consultant
           </div>
-          <ul class="border-t border-slate-100 pt-4 space-y-2 text-xs font-medium text-slate-700">
-            <li class="flex items-center gap-2">✔ アカウント権限・初期設計</li>
-            <li class="flex items-center gap-2">✔ セキュリティポリシー策定</li>
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">シニアAIコンサルタント / PM</h3>
+            <div class="mt-4 border-t border-slate-100 pt-4 space-y-3 text-xs">
+              <div>
+                <p class="font-bold text-brand-teal">【経験年数】</p>
+                <p class="text-slate-700 font-semibold">10年以上（IT・AI推進統括）</p>
+              </div>
+              <div>
+                <p class="font-bold text-brand-teal">【保有スキル】</p>
+                <p class="text-slate-600 leading-relaxed">
+                  LLM導入戦略設計、セキュリティ・社内AIガバナンス策定、業務フロー再設計、カスタムAIツール開発、ベンダーコントロール、全社研修マネジメント
+                </p>
+              </div>
+              <div>
+                <p class="font-bold text-brand-teal">【実績例】</p>
+                <p class="text-slate-600 leading-relaxed">
+                  技術スキルを有するだけでなく、経営層・現場部署間の調整やプロジェクト全体の統括が可能。大手・中小企業の全社AI推進実績多数。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 2: Middle -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">ミドルAIエンジニア / プロンプト設計士</h3>
+            <div class="mt-4 border-t border-slate-100 pt-4 space-y-3 text-xs">
+              <div>
+                <p class="font-bold text-brand-teal">【経験年数】</p>
+                <p class="text-slate-700 font-semibold">5年程度</p>
+              </div>
+              <div>
+                <p class="font-bold text-brand-teal">【保有スキル】</p>
+                <p class="text-slate-600 leading-relaxed">
+                  高度プロンプトエンジニアリング、GPTs・Dify・Make・Zapier自動化構築、社内ヘルプデスク、Python・API連携、データ集計自動化
+                </p>
+              </div>
+              <div>
+                <p class="font-bold text-brand-teal">【実績例】</p>
+                <p class="text-slate-600 leading-relaxed">
+                  営業事務やバックオフィスの定常業務をAIで80%削減した実績。現場の実務に即した専用プロンプト集の制作・運用。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tier 3: Junior -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm flex flex-col justify-between">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900">ジュニアAIアシスタント / オペレーター</h3>
+            <div class="mt-4 border-t border-slate-100 pt-4 space-y-3 text-xs">
+              <div>
+                <p class="font-bold text-brand-teal">【経験年数】</p>
+                <p class="text-slate-700 font-semibold">3年程度</p>
+              </div>
+              <div>
+                <p class="font-bold text-brand-teal">【保有スキル】</p>
+                <p class="text-slate-600 leading-relaxed">
+                  AIアカウント初期キッティング、基礎プロンプト作成、社内マニュアル作成、ハンズオン勉強会運営サポート、日常のQA窓口対応
+                </p>
+              </div>
+              <div>
+                <p class="font-bold text-brand-teal">【実績例】</p>
+                <p class="text-slate-600 leading-relaxed">
+                  社内FAQの作成・更新、AIツールの初期利用マニュアルの整備。社員からの日々の操作質問に対するスムーズな一次回答を担当。
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Service Scope Section (#isd) -->
+  <section id="isd" class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Scope of Work</h2>
+        <p class="text-2xl sm:text-3xl font-black text-slate-900">
+          対応可能なAI推進業務
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        
+        <!-- Category 1 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="flex h-7 w-7 items-center justify-center rounded bg-brand-teal text-white font-bold text-xs">01</span>
+            <h3 class="text-base font-bold text-slate-900">AI環境構築・キッティング</h3>
+          </div>
+          <ul class="space-y-2 text-xs font-medium text-slate-700 divide-y divide-slate-100">
+            <li class="pt-2">✔ アカウント一括設定・権限管理</li>
+            <li class="pt-2">✔ セキュリティポリシー策定</li>
+            <li class="pt-2">✔ 社内利用ガイドライン作成</li>
+            <li class="pt-2">✔ 各種API連携・初期接続設定</li>
+            <li class="pt-2">✔ ツール選定・コスト最適化</li>
+            <li class="pt-2">✔ PC・スマホ端末の環境整備</li>
           </ul>
         </div>
 
-        <!-- Service 2 -->
-        <div class="bg-white rounded-xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
-          <div>
-            <span class="inline-block text-[10px] font-bold text-brand-teal bg-brand-teal/5 px-2 py-0.5 rounded mb-3 border border-brand-teal/10">02. 実務の効率化</span>
-            <h3 class="text-lg font-bold text-slate-900 mb-3">AIヘルプデスク・業務自動化</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              「特定の作業をAIで効率化したい」という現場の声に合わせて、プロンプトの設計やカスタムGPT等のツールを構築。日常の疑問に対応する窓口を設置します。
-            </p>
+        <!-- Category 2 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="flex h-7 w-7 items-center justify-center rounded bg-brand-teal text-white font-bold text-xs">02</span>
+            <h3 class="text-base font-bold text-slate-900">AI運用・業務自動化</h3>
           </div>
-          <ul class="border-t border-slate-100 pt-4 space-y-2 text-xs font-medium text-slate-700">
-            <li class="flex items-center gap-2">✔ カスタムプロンプト開発</li>
-            <li class="flex items-center gap-2">✔ チャット上の専用相談窓口</li>
+          <ul class="space-y-2 text-xs font-medium text-slate-700 divide-y divide-slate-100">
+            <li class="pt-2">✔ 社内AIヘルプデスク窓口</li>
+            <li class="pt-2">✔ 業務専用プロンプト構築</li>
+            <li class="pt-2">✔ Zapier / Make等によるワークフロー自動化</li>
+            <li class="pt-2">✔ 議事録・営業報告書の自動要約</li>
+            <li class="pt-2">✔ 利用マニュアル・テンプレート作成</li>
+            <li class="pt-2">✔ 日常のトラブルシューティング</li>
           </ul>
         </div>
 
-        <!-- Service 3 -->
-        <div class="bg-white rounded-xl border border-slate-200 p-6 flex flex-col justify-between shadow-sm">
-          <div>
-            <span class="inline-block text-[10px] font-bold text-brand-teal bg-brand-teal/5 px-2 py-0.5 rounded mb-3 border border-brand-teal/10">03. 現場力アップ</span>
-            <h3 class="text-lg font-bold text-slate-900 mb-3">現場向け伴走レクチャー・研修</h3>
-            <p class="text-xs text-slate-600 leading-relaxed mb-4">
-              座学のみの研修ではなく、自社の実データや実業務に基づいたハンズオン講習を実施。社員一人ひとりが自発的にAIを道具として使いこなせる状態を作ります。
-            </p>
+        <!-- Category 3 -->
+        <div class="bg-white rounded-xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+          <div class="flex items-center gap-2 mb-4">
+            <span class="flex h-7 w-7 items-center justify-center rounded bg-brand-teal text-white font-bold text-xs">03</span>
+            <h3 class="text-base font-bold text-slate-900">社内研修・伴走PMO</h3>
           </div>
-          <ul class="border-t border-slate-100 pt-4 space-y-2 text-xs font-medium text-slate-700">
-            <li class="flex items-center gap-2">✔ 実際の業務を使った実習</li>
-            <li class="flex items-center gap-2">✔ 習熟度別レベル講習</li>
+          <ul class="space-y-2 text-xs font-medium text-slate-700 divide-y divide-slate-100">
+            <li class="pt-2">✔ 実データを用いたハンズオン講習</li>
+            <li class="pt-2">✔ 業務ヒアリング・改善課題の抽出</li>
+            <li class="pt-2">✔ 部署別AI定着プログラム</li>
+            <li class="pt-2">✔ プロジェクト進捗管理・PMO</li>
+            <li class="pt-2">✔ ベンダーコントロール</li>
+            <li class="pt-2">✔ 経営層向け活用レポート作成</li>
           </ul>
         </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Section (#bpo) -->
+  <section id="bpo" class="py-16 sm:py-24 bg-white border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Comparison</h2>
+        <p class="text-2xl sm:text-3xl font-black text-slate-900">
+          他社コンサル・開発会社・派遣との比較
+        </p>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full text-left text-xs sm:text-sm border-collapse border border-slate-200 min-w-[640px]">
+          <thead>
+            <tr class="bg-slate-100 text-slate-900">
+              <th class="p-4 border border-slate-200 font-bold w-1/4">比較項目</th>
+              <th class="p-4 border border-slate-200 font-bold bg-brand-teal text-white text-center w-1/4">AI TasCal</th>
+              <th class="p-4 border border-slate-200 font-bold text-center w-1/4">一般的なAIコンサル</th>
+              <th class="p-4 border border-slate-200 font-bold text-center w-1/4">一般的な人材派遣</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr>
+              <td class="p-4 border border-slate-200 font-bold text-slate-800">初期費用</td>
+              <td class="p-4 border border-slate-200 font-extrabold text-brand-teal bg-brand-teal/5 text-center">0円（月額制）</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">数十万〜数百万円</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">初期費用・マージン大</td>
+            </tr>
+            <tr>
+              <td class="p-4 border border-slate-200 font-bold text-slate-800">導入スピード</td>
+              <td class="p-4 border border-slate-200 font-extrabold text-brand-teal bg-brand-teal/5 text-center">最短即日〜1週間</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">1〜2ヶ月（要件定義）</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">数週間〜1ヶ月</td>
+            </tr>
+            <tr>
+              <td class="p-4 border border-slate-200 font-bold text-slate-800">現場への伴走・ハンズオン</td>
+              <td class="p-4 border border-slate-200 font-extrabold text-brand-teal bg-brand-teal/5 text-center">◎ 実務密着で支援</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">△ レポート・提言のみ</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">× 指示待ちになりがち</td>
+            </tr>
+            <tr>
+              <td class="p-4 border border-slate-200 font-bold text-slate-800">プロンプト・ツール構築</td>
+              <td class="p-4 border border-slate-200 font-extrabold text-brand-teal bg-brand-teal/5 text-center">◎ 即座に自作・納品</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">別途開発費が発生</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">スキル不足が多い</td>
+            </tr>
+            <tr>
+              <td class="p-4 border border-slate-200 font-bold text-slate-800">契約の柔軟性</td>
+              <td class="p-4 border border-slate-200 font-extrabold text-brand-teal bg-brand-teal/5 text-center">◎ 1ヶ月単位で調整可能</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">半年〜年単位縛り</td>
+              <td class="p-4 border border-slate-200 text-center text-slate-600">3ヶ月〜長期縛り</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   </section>
 
   <!-- Pricing Section -->
-  <section id="pricing" class="py-16 sm:py-24 bg-white border-b border-slate-200">
+  <section id="pricing" class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
     <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-      <div class="text-center max-w-3xl mx-auto mb-12">
-        <h2 class="text-brand-teal font-extrabold text-sm uppercase tracking-wider mb-2">Plans</h2>
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Plans</h2>
         <p class="text-2xl sm:text-3xl font-black text-slate-900">
           企業のフェーズに合わせた料金プラン
         </p>
@@ -365,41 +664,43 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <!-- Plan 1 -->
-        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+        <div class="rounded-xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm flex flex-col justify-between">
           <div>
             <h3 class="text-base font-bold text-slate-900">スポット対応プラン</h3>
             <p class="text-xs text-slate-500 mt-1">必要な時に単発で依頼したい企業様向け</p>
             <p class="mt-4 flex items-baseline text-slate-900">
-              <span class="text-2xl font-black">¥50,000〜</span>
+              <span class="text-3xl font-black">¥50,000〜</span>
               <span class="ml-1 text-xs text-slate-500">/回</span>
             </p>
-            <ul class="border-t border-slate-100 mt-6 pt-4 space-y-2 text-xs text-slate-600">
-              <li>・特定業務のプロンプト構築（1件）</li>
-              <li>・ガイドライン策定アドバイス</li>
+            <ul class="border-t border-slate-100 mt-6 pt-4 space-y-2.5 text-xs text-slate-600">
+              <li class="flex items-center gap-2">✔ 特定業務のプロンプト構築（1件）</li>
+              <li class="flex items-center gap-2">✔ セキュリティガイドライン策定支援</li>
+              <li class="flex items-center gap-2">✔ 社内向けAI勉強会の単発開催（1回）</li>
             </ul>
           </div>
-          <a href="#contact" class="mt-8 block rounded border border-slate-300 bg-white py-2 text-center text-xs font-bold text-slate-700 hover:bg-slate-50 transition">
+          <a href="#contact" class="mt-8 block rounded border border-slate-300 bg-white py-3 text-center text-xs font-bold text-slate-700 hover:bg-slate-50 transition">
             このプランを相談する
           </a>
         </div>
 
         <!-- Plan 2 -->
-        <div class="rounded-xl border-2 border-brand-teal bg-white p-6 shadow shadow-brand-teal/5 flex flex-col justify-between relative">
-          <div class="absolute -top-3.5 right-6 rounded bg-brand-teal px-2 py-0.5 text-[10px] font-bold text-white">おすすめ</div>
+        <div class="rounded-xl border-2 border-brand-teal bg-white p-6 sm:p-8 shadow-md flex flex-col justify-between relative">
+          <div class="absolute -top-3.5 right-6 rounded bg-brand-teal px-2.5 py-0.5 text-[10px] font-bold text-white">おすすめ</div>
           <div>
             <h3 class="text-base font-bold text-slate-900">月額伴走サポートプラン</h3>
-            <p class="text-xs text-slate-500 mt-1">定着支援と継続的な業務改善を進めたい企業様向け</p>
+            <p class="text-xs text-slate-500 mt-1">定着支援と継続的な業務自動化を進めたい企業様向け</p>
             <p class="mt-4 flex items-baseline text-slate-900">
-              <span class="text-2xl font-black">¥150,000〜</span>
+              <span class="text-3xl font-black">¥150,000〜</span>
               <span class="ml-1 text-xs text-slate-500">/月</span>
             </p>
-            <ul class="border-t border-slate-100 mt-6 pt-4 space-y-2 text-xs text-slate-600">
-              <li>・毎月の新規プロンプト構築＆改善（無制限）</li>
-              <li>・Slackやチャットによる日常ヘルプデスク</li>
-              <li>・月1回のハンズオン研修・対面進捗会</li>
+            <ul class="border-t border-slate-100 mt-6 pt-4 space-y-2.5 text-xs text-slate-600">
+              <li class="flex items-center gap-2">✔ 毎月の新規プロンプト構築＆改善（無制限）</li>
+              <li class="flex items-center gap-2">✔ Slack / Teams等による日常ヘルプデスク対応</li>
+              <li class="flex items-center gap-2">✔ 月1〜2回のハンズオン研修・進捗定例ミーティング</li>
+              <li class="flex items-center gap-2">✔ 最新AIツールの調査と自社適用提案</li>
             </ul>
           </div>
-          <a href="#contact" class="mt-8 block rounded bg-brand-teal py-2 text-center text-xs font-bold text-white hover:bg-brand-tealHover transition">
+          <a href="#contact" class="mt-8 block rounded bg-brand-teal py-3 text-center text-xs font-bold text-white hover:bg-brand-tealHover transition shadow">
             このプランを相談する
           </a>
         </div>
@@ -407,49 +708,243 @@
     </div>
   </section>
 
-  <!-- Flow Section -->
+  <!-- Case Study Section (#case) -->
+  <section id="case" class="py-16 sm:py-24 bg-white border-b border-slate-200">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Case Study</h2>
+        <p class="text-2xl sm:text-3xl font-black text-slate-900">
+          導入事例
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+        <!-- Case 1 -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="inline-block rounded bg-brand-teal/10 text-brand-teal px-2 py-0.5 text-[10px] font-bold mb-3">建築・不動産業（社員数35名）</span>
+            <h3 class="text-base font-bold text-slate-900 mb-2">見積書作成・要約で月60時間を削減</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              現場ごとの仕様書から見積下書きを作る専用プロンプトを構築。作成時間が1件あたり45分から5分に短縮され、残業が大幅に減少しました。
+            </p>
+          </div>
+          <div class="mt-6 border-t border-slate-100 pt-4 text-xs font-bold text-brand-tagGreen">
+            削減効果: 月間約60時間の工数削減
+          </div>
+        </div>
+
+        <!-- Case 2 -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="inline-block rounded bg-brand-teal/10 text-brand-teal px-2 py-0.5 text-[10px] font-bold mb-3">専門商社（社員数80名）</span>
+            <h3 class="text-base font-bold text-slate-900 mb-2">放置状態のAIツールが全社で稼働</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              ChatGPT導入後に利用率が低迷していたところ、週1回のハンズオン研修を実施。社員自身がメール作成や翻訳に自発活用する文化が定着しました。
+            </p>
+          </div>
+          <div class="mt-6 border-t border-slate-100 pt-4 text-xs font-bold text-brand-tagGreen">
+            定着効果: 社内利用率 15% ➔ 92% へ向上
+          </div>
+        </div>
+
+        <!-- Case 3 -->
+        <div class="rounded-xl border border-slate-200 bg-white p-6 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="inline-block rounded bg-brand-teal/10 text-brand-teal px-2 py-0.5 text-[10px] font-bold mb-3">製造業・バックオフィス（社員数120名）</span>
+            <h3 class="text-base font-bold text-slate-900 mb-2">受発注データの集計を完全自動化</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              複雑なCSV受発注データのクレンジングと集計を自動化するツールを短期間で開発。入力ミスや集計漏れがゼロになりました。
+            </p>
+          </div>
+          <div class="mt-6 border-t border-slate-100 pt-4 text-xs font-bold text-brand-tagGreen">
+            品質効果: 集計ミスゼロ & 処理速度8倍
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Flow Section (#flow) -->
   <section id="flow" class="py-16 sm:py-24 bg-slate-50 border-b border-slate-200">
     <div class="mx-auto max-w-5xl px-4 sm:px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-brand-teal font-extrabold text-sm uppercase tracking-wider mb-2">Process</h2>
+      <div class="text-center mb-16">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">Flow</h2>
         <p class="text-2xl sm:text-3xl font-black text-slate-900">ご利用の流れ</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div class="bg-white p-6 rounded-xl border border-slate-200">
-          <div class="mx-auto h-8 w-8 rounded-full bg-brand-teal text-white flex items-center justify-center font-bold text-sm mb-4">1</div>
-          <h3 class="text-sm font-bold text-slate-900 mb-2">無料お打ち合わせ</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">現在の業務プロセスとお悩みのヒアリングを行い、AIによる解決策を提案します。</p>
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-black tracking-widest text-brand-teal uppercase">STEP</span>
+            <div class="mx-auto h-9 w-9 rounded-full bg-brand-teal text-white flex items-center justify-center font-black text-sm my-2">01</div>
+            <h3 class="text-sm font-bold text-slate-900 mb-2">初回打ち合わせ</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">現在のご状況、抱えている課題やAIで解決したい要望について詳しくお伺いします。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-xl border border-slate-200">
-          <div class="mx-auto h-8 w-8 rounded-full bg-brand-teal text-white flex items-center justify-center font-bold text-sm mb-4">2</div>
-          <h3 class="text-sm font-bold text-slate-900 mb-2">初期設計・アカウント構築</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">安全にAIを利用するための環境設定やガイドラインを構築・整理します。</p>
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-black tracking-widest text-brand-teal uppercase">STEP</span>
+            <div class="mx-auto h-9 w-9 rounded-full bg-brand-teal text-white flex items-center justify-center font-black text-sm my-2">02</div>
+            <h3 class="text-sm font-bold text-slate-900 mb-2">最適なプラン提案</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">ヒアリング内容をもとに、御社に最適なプロフェッショナル体制と進め方をご提案します。</p>
+          </div>
         </div>
-        <div class="bg-white p-6 rounded-xl border border-slate-200">
-          <div class="mx-auto h-8 w-8 rounded-full bg-brand-teal text-white flex items-center justify-center font-bold text-sm mb-4">3</div>
-          <h3 class="text-sm font-bold text-slate-900 mb-2">伴走サポート開始</h3>
-          <p class="text-xs text-slate-600 leading-relaxed">日常のプロンプト構築、相談窓口対応、および研修を毎月定期的に実施します。</p>
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-black tracking-widest text-brand-teal uppercase">STEP</span>
+            <div class="mx-auto h-9 w-9 rounded-full bg-brand-teal text-white flex items-center justify-center font-black text-sm my-2">03</div>
+            <h3 class="text-sm font-bold text-slate-900 mb-2">ご契約・導入準備</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">ご提案内容をご確認後、契約を締結。アカウント整備や初期ガイドラインの準備を進めます。</p>
+          </div>
+        </div>
+
+        <div class="bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col justify-between">
+          <div>
+            <span class="text-[10px] font-black tracking-widest text-brand-teal uppercase">STEP</span>
+            <div class="mx-auto h-9 w-9 rounded-full bg-brand-teal text-white flex items-center justify-center font-black text-sm my-2">04</div>
+            <h3 class="text-sm font-bold text-slate-900 mb-2">ご利用・伴走開始</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">準備完了後すぐにご利用開始。プロンプト構築、相談対応、研修を通じて業務改善を加速させます。</p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Contact Form Section (Global / Details) -->
-  <section id="contact" class="py-16 sm:py-24 bg-white">
-    <div class="mx-auto max-w-3xl px-4 sm:px-6">
-      <div class="text-center mb-12">
-        <h2 class="text-brand-teal font-extrabold text-sm uppercase tracking-wider mb-2">Contact</h2>
-        <p class="text-2xl sm:text-3xl font-black text-slate-900">
-          資料請求・お問い合わせ
-        </p>
-        <p class="text-xs text-slate-500 mt-2">
-          お仕事の相談や資料ダウンロードは以下のフォームよりお願いいたします。
-        </p>
+  <!-- FAQ Section (#faq) -->
+  <section id="faq" class="py-16 sm:py-24 bg-white border-b border-slate-200">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-brand-teal font-extrabold text-xs uppercase tracking-wider mb-2">FAQ</h2>
+        <p class="text-2xl sm:text-3xl font-black text-slate-900">よくある質問</p>
       </div>
 
-      <div class="rounded-xl border border-slate-200 p-6 sm:p-10 shadow-sm bg-slate-50">
-        <form id="globalContactForm" class="space-y-6">
+      <div class="space-y-4">
+        
+        <!-- FAQ 1 -->
+        <details class="group border border-slate-200 rounded-xl p-5 open:bg-slate-50 transition">
+          <summary class="flex justify-between items-center font-bold text-sm text-slate-900 cursor-pointer list-none">
+            <span class="flex items-center gap-3">
+              <span class="rounded bg-brand-teal text-white text-[10px] font-bold px-2 py-0.5">伴走</span>
+              最低利用期間はどのくらいですか？
+            </span>
+            <span class="transition group-open:rotate-180">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-xs text-slate-600 leading-relaxed pl-12">
+            月額伴走サポートプランは1ヶ月単位でご利用いただけます。長期縛りはございませんので、繁忙期やプロジェクトの期間に合わせて柔軟にご利用可能です。
+          </p>
+        </details>
+
+        <!-- FAQ 2 -->
+        <details class="group border border-slate-200 rounded-xl p-5 open:bg-slate-50 transition">
+          <summary class="flex justify-between items-center font-bold text-sm text-slate-900 cursor-pointer list-none">
+            <span class="flex items-center gap-3">
+              <span class="rounded bg-brand-teal text-white text-[10px] font-bold px-2 py-0.5">伴走</span>
+              1名だけでなく、複数名のチームで支援してもらうことは可能ですか？
+            </span>
+            <span class="transition group-open:rotate-180">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-xs text-slate-600 leading-relaxed pl-12">
+            はい、可能です。シニアコンサルタントによるPMOと、プロンプト構築を担当するエンジニアを組み合わせたチーム体制でのご支援も対応しております。
+          </p>
+        </details>
+
+        <!-- FAQ 3 -->
+        <details class="group border border-slate-200 rounded-xl p-5 open:bg-slate-50 transition">
+          <summary class="flex justify-between items-center font-bold text-sm text-slate-900 cursor-pointer list-none">
+            <span class="flex items-center gap-3">
+              <span class="rounded bg-brand-teal text-white text-[10px] font-bold px-2 py-0.5">伴走</span>
+              リモートだけでなく、オフィス出社での研修や相談は可能ですか？
+            </span>
+            <span class="transition group-open:rotate-180">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-xs text-slate-600 leading-relaxed pl-12">
+            はい、全国対応可能です。定例のハンズオン研修や初期ヒアリング時のオンサイト（対面出社）でのご支援も柔軟に対応しております。
+          </p>
+        </details>
+
+        <!-- FAQ 4 -->
+        <details class="group border border-slate-200 rounded-xl p-5 open:bg-slate-50 transition">
+          <summary class="flex justify-between items-center font-bold text-sm text-slate-900 cursor-pointer list-none">
+            <span class="flex items-center gap-3">
+              <span class="rounded bg-brand-green text-white text-[10px] font-bold px-2 py-0.5">BPO</span>
+              機密情報やセキュリティ面の対策はどうなっていますか？
+            </span>
+            <span class="transition group-open:rotate-180">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-xs text-slate-600 leading-relaxed pl-12">
+            秘密保持契約（NDA）の締結はもちろん、AIの学習にデータが利用されないエンタープライズ設定（オプトアウト）や、社内利用ガイドラインの整備を徹底してサポートいたします。
+          </p>
+        </details>
+
+        <!-- FAQ 5 -->
+        <details class="group border border-slate-200 rounded-xl p-5 open:bg-slate-50 transition">
+          <summary class="flex justify-between items-center font-bold text-sm text-slate-900 cursor-pointer list-none">
+            <span class="flex items-center gap-3">
+              <span class="rounded bg-brand-green text-white text-[10px] font-bold px-2 py-0.5">BPO</span>
+              ITやAIの知識が全くない社員ばかりですが問題ありませんか？
+            </span>
+            <span class="transition group-open:rotate-180">
+              <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+            </span>
+          </summary>
+          <p class="mt-3 text-xs text-slate-600 leading-relaxed pl-12">
+            全く問題ありません。むしろITが苦手な現場の方でも今日からすぐに使えるテンプレートやプロンプトを構築し、わかりやすいハンズオンで丁寧に伴走いたします。
+          </p>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Bottom CTA Callout Banner & Contact Form (#contact) -->
+  <section id="contact" class="py-16 sm:py-24 bg-brand-bgLight">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
+      
+      <!-- Top Callout Header (Green Banner) -->
+      <div class="rounded-2xl bg-brand-green p-8 sm:p-12 text-center text-white shadow-xl mb-12 circle-pattern">
+        <h2 class="text-2xl sm:text-3xl font-black mb-4">
+          AI人材不足の不安をゼロに！<br>AI推進・伴走支援なら AI TasCal
+        </h2>
+        <p class="text-xs sm:text-sm max-w-2xl mx-auto leading-relaxed mb-8 opacity-95">
+          AI TasCalなら、必要な時に即戦力のプロを派遣・BPO支援し、社内AI活用をしっかりサポート。まずは無料相談でお気軽にお問い合わせください。
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="#download" class="inline-flex items-center justify-center rounded bg-slate-900 px-7 py-3 text-sm font-bold text-white hover:bg-black transition shadow gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            資料ダウンロード
+          </a>
+          <a href="#contactFormCard" class="inline-flex items-center justify-center rounded bg-white px-7 py-3 text-sm font-bold text-brand-teal hover:bg-slate-50 transition shadow gap-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            お問い合わせ
+          </a>
+        </div>
+      </div>
+
+      <!-- Bottom Contact Form Card (#contactFormCard) -->
+      <div id="contactFormCard" class="rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-lg bg-white">
+        <div class="text-center mb-8">
+          <span class="text-brand-teal font-extrabold text-xs uppercase tracking-wider">Contact Us</span>
+          <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">
+            無料相談・お見積もりのお問い合わせ
+          </h3>
+          <p class="text-xs text-slate-500 mt-2">
+            AI導入に関するご質問やご相談、料金のお見積もりなど、お気軽にお問い合わせください。
+          </p>
+        </div>
+
+        <form id="globalContactForm" class="space-y-4">
           <!-- Honeypot Bot Trap (Invisible to humans) -->
           <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true">
             <label for="c_hp_website">Leave blank</label>
@@ -476,58 +971,107 @@
           <div>
             <label for="c_plan" class="block text-xs font-bold text-slate-700">検討中のプラン</label>
             <select id="c_plan" name="plan" class="mt-1 block w-full rounded border border-slate-300 px-3 py-2.5 text-sm focus:border-brand-teal focus:outline-none">
-              <option value="none">選択してください</option>
+              <option value="undecided">まずは相談して決めたい</option>
               <option value="spot">スポット対応プラン</option>
               <option value="monthly">月額伴走サポートプラン</option>
-              <option value="download">資料ダウンロードのみ希望</option>
+              <option value="team">専任チーム・エンタープライズ</option>
             </select>
           </div>
 
           <div>
             <label for="c_message" class="block text-xs font-bold text-slate-700">ご相談内容 <span class="text-red-500">*</span></label>
-            <textarea id="c_message" name="message" rows="4" placeholder="AIの導入時期、具体的な業務自動化のご相談など、何でもご記入ください。" required class="mt-1 block w-full rounded border border-slate-300 px-3 py-2.5 text-sm focus:border-brand-teal focus:outline-none"></textarea>
+            <textarea id="c_message" name="message" rows="4" placeholder="AIの導入時期、具体的な業務自動化のご相談、研修のご希望など、何でもご記入ください。" required class="mt-1 block w-full rounded border border-slate-300 px-3 py-2.5 text-sm focus:border-brand-teal focus:outline-none"></textarea>
           </div>
 
-          <button type="submit" class="w-full rounded bg-brand-green py-3 text-sm font-bold text-white transition hover:bg-brand-greenHover shadow">
+          <button type="submit" class="w-full rounded bg-brand-green py-3.5 text-sm font-bold text-white transition hover:bg-brand-greenHover shadow">
             送信する
           </button>
         </form>
 
-        <!-- Simulated Contact Success Msg -->
+        <!-- Success Message -->
         <div id="globalSuccessMsg" class="hidden text-center py-8 space-y-3">
           <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-emerald-100 text-emerald-600">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
               <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
             </svg>
           </div>
-          <p class="text-base font-bold text-slate-900">お問い合わせありがとうございました</p>
-          <p class="text-xs text-slate-600">確認の上、通常1営業日以内に担当よりご連絡いたします。</p>
+          <p class="text-base font-bold text-slate-900">お問い合わせありがとうございました！</p>
+          <p class="text-xs text-slate-600">内容を確認の上、通常1営業日以内に担当コンサルタントよりご連絡いたします。</p>
         </div>
       </div>
+
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800">
-    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center space-y-6">
-      <div class="flex items-center justify-center gap-2">
-        <span class="text-xl font-black tracking-tight">
-          <span class="text-brand-green font-extrabold italic">AI</span>
-          <span class="text-brand-teal font-extrabold font-sans">TasCal</span>
-        </span>
+  <!-- Footer (Dark Background Aligned to IT TasCal) -->
+  <footer class="bg-brand-darkBg text-slate-400 pt-16 pb-12 border-t border-slate-800">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 pb-12 border-b border-slate-800">
+        
+        <!-- Brand Info -->
+        <div class="lg:col-span-2 space-y-4">
+          <div class="flex items-center gap-2">
+            <span class="text-2xl font-black tracking-tight">
+              <span class="text-brand-green font-extrabold italic">AI</span>
+              <span class="text-white font-extrabold font-sans">TasCal</span>
+            </span>
+            <span class="text-[10px] font-bold bg-white/10 text-brand-green px-2 py-0.5 rounded-full">AI助かる</span>
+          </div>
+          <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+            採用不要・月額制で、社内のAI活用・業務効率化を即解決！プロンプト構築から業務自動化、現場研修まで丸ごと伴走サポート。
+          </p>
+        </div>
+
+        <!-- Links Col 1 -->
+        <div class="space-y-3 text-xs">
+          <p class="font-bold text-white uppercase tracking-wider">サービス</p>
+          <ul class="space-y-2">
+            <li><a href="#about" class="hover:text-white transition">AI TasCalで解決できること</a></li>
+            <li><a href="#engineer" class="hover:text-white transition">在籍プロフェッショナルのご紹介</a></li>
+            <li><a href="#isd" class="hover:text-white transition">対応可能なAI推進業務</a></li>
+            <li><a href="#bpo" class="hover:text-white transition">他社BPOとの比較</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Col 2 -->
+        <div class="space-y-3 text-xs">
+          <p class="font-bold text-white uppercase tracking-wider">実績・ご利用案内</p>
+          <ul class="space-y-2">
+            <li><a href="#case" class="hover:text-white transition">導入事例</a></li>
+            <li><a href="#flow" class="hover:text-white transition">ご利用の流れ</a></li>
+            <li><a href="#pricing" class="hover:text-white transition">料金プラン</a></li>
+            <li><a href="#faq" class="hover:text-white transition">よくある質問</a></li>
+          </ul>
+        </div>
+
+        <!-- Links Col 3 -->
+        <div class="space-y-3 text-xs">
+          <p class="font-bold text-white uppercase tracking-wider">お問い合わせ</p>
+          <ul class="space-y-2">
+            <li><a href="#download" class="hover:text-white transition">資料請求（無料）</a></li>
+            <li><a href="#contact" class="hover:text-white transition">無料相談・お問い合わせ</a></li>
+            <li><a href="#privacy" class="hover:text-white transition">プライバシーポリシー</a></li>
+          </ul>
+        </div>
+
       </div>
-      <p class="text-xs text-slate-500">
-        &copy; 2026 AI TasCal. All rights reserved.
-      </p>
+
+      <!-- Copyright -->
+      <div class="pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-slate-500 gap-4">
+        <p>&copy; 2026 AI TasCal. All Rights Reserved.</p>
+        <p class="text-[11px]">企業向けAI導入・伴走アウトソーシングサービス</p>
+      </div>
+
     </div>
   </footer>
 
-  <!-- Script for form submission via native Cloudflare Worker to miidacnt@gmail.com with Bot Protection -->
+  <!-- Script for form submission via native Cloudflare Worker with Bot Protection -->
   <script>
     const ENDPOINT = "/api/contact";
     const pageLoadedAt = Date.now();
 
-    // Hero download form
+    // Hero download form (#download)
     const heroForm = document.getElementById('heroDownloadForm');
     const heroSuccess = document.getElementById('heroSuccessMsg');
     if (heroForm && heroSuccess) {
@@ -573,7 +1117,7 @@
       });
     }
 
-    // Global contact form
+    // Global contact form (#contactFormCard)
     const globalForm = document.getElementById('globalContactForm');
     const globalSuccess = document.getElementById('globalSuccessMsg');
     if (globalForm && globalSuccess) {
