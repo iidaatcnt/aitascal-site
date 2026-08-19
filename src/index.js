@@ -9,6 +9,33 @@ export default {
       try {
         const data = await request.json();
         
+        // --- Anti-Bot Defenses ---
+        // 1. Honeypot check: If the hidden honeypot fields contain any value, silently discard without sending email
+        if (data.website_url || data.fax_number || data.honeypot) {
+          console.warn("Blocked bot submission via honeypot trap:", {
+            name: data.お名前,
+            email: data.メールアドレス,
+            honeypot: data.website_url || data.fax_number || data.honeypot
+          });
+          // Return 200 OK success to fool the bot into thinking it succeeded
+          return new Response(JSON.stringify({ success: true }), {
+            headers: { "Content-Type": "application/json" }
+          });
+        }
+
+        // 2. Submission speed check: Bots submit forms in under 2 seconds
+        if (data._time_taken !== undefined && data._time_taken < 2) {
+          console.warn("Blocked fast bot submission:", {
+            name: data.お名前,
+            email: data.メールアドレス,
+            timeTakenSec: data._time_taken
+          });
+          return new Response(JSON.stringify({ success: true }), {
+            headers: { "Content-Type": "application/json" }
+          });
+        }
+
+        // --- Legitimate Submission Processing ---
         const now = new Date().toLocaleString("ja-JP", { timeZone: "Asia/Tokyo" });
         const subject = data._subject || "【AI TasCal】Webサイトよりお問い合わせがありました";
         
@@ -65,7 +92,7 @@ export default {
           headers: { "Content-Type": "application/json" }
         });
       } catch (err) {
-        console.error("Failed to send email:", err);
+        console.error("Failed to process submission:", err);
         return new Response(JSON.stringify({ success: false, error: err.message }), {
           status: 500,
           headers: { "Content-Type": "application/json" }

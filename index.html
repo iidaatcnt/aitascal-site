@@ -166,6 +166,13 @@
             AI TasCalのサービス資料を<br>今すぐ無料でダウンロード
           </h3>
           <form id="heroDownloadForm" class="space-y-4">
+            <!-- Honeypot Bot Trap (Invisible to humans) -->
+            <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true">
+              <label for="hero_hp_website">Leave blank</label>
+              <input type="text" id="hero_hp_website" name="website_url" tabindex="-1" autocomplete="off">
+              <input type="text" id="hero_hp_fax" name="fax_number" tabindex="-1" autocomplete="off">
+            </div>
+
             <div>
               <label for="hero_company" class="block text-xs font-bold text-slate-700">会社名 <span class="text-red-500 font-normal">*</span></label>
               <input type="text" id="hero_company" name="company" placeholder="例：株式会社タスカル" required class="mt-1 block w-full rounded border border-slate-300 px-3 py-2 text-sm focus:border-brand-teal focus:outline-none">
@@ -438,6 +445,13 @@
 
       <div class="rounded-xl border border-slate-200 p-6 sm:p-10 shadow-sm bg-slate-50">
         <form id="globalContactForm" class="space-y-6">
+          <!-- Honeypot Bot Trap (Invisible to humans) -->
+          <div style="position: absolute; left: -9999px; top: -9999px; width: 1px; height: 1px; opacity: 0; pointer-events: none;" aria-hidden="true">
+            <label for="c_hp_website">Leave blank</label>
+            <input type="text" id="c_hp_website" name="website_url" tabindex="-1" autocomplete="off">
+            <input type="text" id="c_hp_fax" name="fax_number" tabindex="-1" autocomplete="off">
+          </div>
+
           <div>
             <label for="c_company" class="block text-xs font-bold text-slate-700">会社名 <span class="text-red-500">*</span></label>
             <input type="text" id="c_company" name="company" placeholder="例：株式会社タスカル" required class="mt-1 block w-full rounded border border-slate-300 px-3 py-2.5 text-sm focus:border-brand-teal focus:outline-none">
@@ -503,9 +517,10 @@
     </div>
   </footer>
 
-  <!-- Script for form submission via native Cloudflare Worker to miidacnt@gmail.com -->
+  <!-- Script for form submission via native Cloudflare Worker to miidacnt@gmail.com with Bot Protection -->
   <script>
     const ENDPOINT = "/api/contact";
+    const pageLoadedAt = Date.now();
 
     // Hero download form
     const heroForm = document.getElementById('heroDownloadForm');
@@ -514,9 +529,12 @@
       heroForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         const submitBtn = heroForm.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.innerText;
         submitBtn.disabled = true;
         submitBtn.innerText = '送信中...';
+
+        const timeTaken = Math.round((Date.now() - pageLoadedAt) / 1000);
+        const hpWebsite = document.getElementById('hero_hp_website')?.value || '';
+        const hpFax = document.getElementById('hero_hp_fax')?.value || '';
 
         const payload = {
           _subject: '【AI TasCal】資料ダウンロード請求がありました',
@@ -526,7 +544,10 @@
           メールアドレス: document.getElementById('hero_email').value,
           電話番号: document.getElementById('hero_phone').value,
           認知経路: document.getElementById('hero_source').value,
-          お問い合わせ内容: document.getElementById('hero_message').value || '（なし）'
+          お問い合わせ内容: document.getElementById('hero_message').value || '（なし）',
+          website_url: hpWebsite,
+          fax_number: hpFax,
+          _time_taken: timeTaken
         };
 
         try {
@@ -559,6 +580,9 @@
 
         const planSelect = document.getElementById('c_plan');
         const planText = planSelect.options[planSelect.selectedIndex].text;
+        const timeTaken = Math.round((Date.now() - pageLoadedAt) / 1000);
+        const hpWebsite = document.getElementById('c_hp_website')?.value || '';
+        const hpFax = document.getElementById('c_hp_fax')?.value || '';
 
         const payload = {
           _subject: '【AI TasCal】Webサイトよりお問い合わせがありました',
@@ -567,7 +591,10 @@
           お名前: document.getElementById('c_name').value,
           メールアドレス: document.getElementById('c_email').value,
           検討中のプラン: planText,
-          ご相談内容: document.getElementById('c_message').value
+          ご相談内容: document.getElementById('c_message').value,
+          website_url: hpWebsite,
+          fax_number: hpFax,
+          _time_taken: timeTaken
         };
 
         try {
